@@ -1,171 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Baccalaureate Tools</title>
+  <title>Calculatrice de Moyenne Générale</title>
   <style>
+    /* Styles for the calculator */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      padding: 20px;
+      background-color: #f2f2f2;
+      color: #333;
+      text-align: center;
     }
-    
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+
+    h1 {
+      color: #ff5e3a;
+      margin-top: 30px;
     }
-    
-    .form-group {
-      margin-bottom: 10px;
+
+    form {
+      margin-top: 20px;
     }
-    
-    .form-group label {
+
+    label {
       display: block;
       margin-bottom: 5px;
-      color: #333;
-      font-weight: bold;
     }
-    
-    .form-group input {
-      width: 100%;
-      padding: 5px;
+
+    input[type="number"] {
+      padding: 8px;
       border: 1px solid #ccc;
-      border-radius: 3px;
+      border-radius: 4px;
     }
-    
-    .btn {
-      display: inline-block;
-      padding: 8px 12px;
-      background-color: #e74c3c;
+
+    input[type="submit"] {
+      background-color: #ff5e3a;
       color: #fff;
-      text-decoration: none;
-      border-radius: 3px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
-    
-    .btn:hover {
-      background-color: #c0392b;
+
+    input[type="submit"]:hover {
+      background-color: #e24c2a;
     }
-    
-    .result {
+
+    #result {
       margin-top: 20px;
-      font-weight: bold;
-      color: #333;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      animation: fadeIn 1s ease-in-out;
     }
-    
-    .result-description {
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Styles for the mention messages */
+    .mention-message {
       margin-top: 10px;
       font-weight: bold;
     }
-    
+
     .mention-passable {
-      color: #2980b9;
+      color: #ff9800;
     }
-    
+
     .mention-assez-bien {
-      color: #27ae60;
+      color: #4caf50;
     }
-    
+
     .mention-bien {
-      color: #f39c12;
+      color: #2196f3;
     }
-    
+
     .mention-tres-bien {
-      color: #c0392b;
+      color: #ff5722;
     }
-    
-    .no-mention {
-      color: #777;
+
+    .aucune-mention {
+      color: #9e9e9e;
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align: center; color: #e74c3c;">Baccalaureate Tools</h1>
-  
-  <div class="container">
-    <h2 style="text-align: center; color: #e74c3c;">Moyenne Générale Calculator</h2>
-    <div class="form-group">
-      <label for="nationalExam">La note d'examen national:</label>
-      <input type="number" id="nationalExam" min="0" step="0.01">
-    </div>
-    <div class="form-group">
-      <label for="regionalExam">La note d'examen régional:</label>
-      <input type="number" id="regionalExam" min="0" step="0.01">
-    </div>
-    <div class="form-group">
-      <label for="session1">La note du session 1:</label>
-      <input type="number" id="session1" min="0" step="0.01">
-    </div>
-    <div class="form-group">
-      <label for="session2">La note du session 2:</label>
-      <input type="number" id="session2" min="0" step="0.01">
-    </div>
-    <button class="btn" onclick="calculateMoyenneGenerale()">Calculate Moyenne Générale</button>
-    <div class="result" id="moyenneGeneraleResult"></div>
-  </div>
+  <h1>Calculatrice de Moyenne Générale</h1>
 
-  <div class="container">
-    <h2 style="text-align: center; color: #e74c3c;">Result Calculation Tool</h2>
-    <div class="form-group">
-      <label for="nationalExam2">La note d'examen national:</label>
-      <input type="number" id="nationalExam2" min="0" step="0.01">
-    </div>
-    <div class="form-group">
-      <label for="regionalExam2">La note d'examen régional:</label>
-      <input type="number" id="regionalExam2" min="0" step="0.01">
-    </div>
-    <button class="btn" onclick="calculateResult()">Calculate Result</button>
-    <div class="result" id="resultCalculationResult"></div>
-  </div>
+  <form id="score-form">
+    <label for="national-score">Note d'examen national :</label>
+    <input type="number" id="national-score" required>
+    <br>
 
-  <div class="container">
-    <h2 style="text-align: center; color: #e74c3c;">Equation Calculation Tool</h2>
-    <div class="form-group">
-      <label for="session1">La note du session 1:</label>
-      <input type="number" id="session1" min="0" step="0.01">
-    </div>
-    <div class="form-group">
-      <label for="session2">La note du session 2:</label>
-      <input type="number" id="session2" min="0" step="0.01">
-    </div>
-    <button class="btn" onclick="calculateEquation()">Calculate Equation</button>
-    <div class="result" id="equationCalculationResult"></div>
+    <label for="regional-score">Note d'examen régional :</label>
+    <input type="number" id="regional-score" required>
+    <br>
+
+    <label for="session1-score">Note de la session 1 :</label>
+    <input type="number" id="session1-score" required>
+    <br>
+
+    <label for="session2-score">Note de la session 2 :</label>
+    <input type="number" id="session2-score" required>
+    <br>
+
+    <input type="submit" value="Calculer">
+  </form>
+
+  <div id="result">
+    <!-- Le résultat, la mention et le message d'encouragement seront affichés ici -->
   </div>
 
   <script>
-    function calculateMoyenneGenerale() {
-      var nationalExam = parseFloat(document.getElementById('nationalExam').value);
-      var regionalExam = parseFloat(document.getElementById('regionalExam').value);
-      var session1 = parseFloat(document.getElementById('session1').value);
-      var session2 = parseFloat(document.getElementById('session2').value);
+    const form = document.getElementById('score-form');
+    const resultDiv = document.getElementById('result');
 
-      var moyenneGenerale = (nationalExam * 0.5) + (regionalExam * 0.25) + (session1 * 0.125) + (session2 * 0.125);
-      
-      document.getElementById('moyenneGeneraleResult').innerHTML = "Moyenne Générale: " + moyenneGenerale.toFixed(2);
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nationalScore = parseFloat(document.getElementById('national-score').value);
+      const regionalScore = parseFloat(document.getElementById('regional-score').value);
+      const session1Score = parseFloat(document.getElementById('session1-score').value);
+      const session2Score = parseFloat(document.getElementById('session2-score').value);
+
+      const moyenneGenerale = (nationalScore * 0.5) + (regionalScore * 0.25) + (session1Score * 0.125) + (session2Score * 0.125);
+      const mention = getMention(moyenneGenerale);
+      const encouragement = getEncouragement(mention);
+
+      resultDiv.innerHTML = `Moyenne Générale : ${moyenneGenerale.toFixed(2)} <br> Mention : <span class="${mention.toLowerCase().replace(/\s/g, '-')}">${mention}</span> <br> ${encouragement}`;
+    });
+
+    function getMention(score) {
+      if (score >= 10 && score < 12) {
+        return 'Mention Passable';
+      } else if (score >= 12 && score < 14) {
+        return 'Mention Assez Bien';
+      } else if (score >= 14 && score < 16) {
+        return 'Mention Bien';
+      } else if (score >= 16 && score <= 20) {
+        return 'Mention Très Bien';
+      } else {
+        return 'Aucune Mention';
+      }
     }
 
-    function calculateResult() {
-      var nationalExam = parseFloat(document.getElementById('nationalExam2').value);
-      var regionalExam = parseFloat(document.getElementById('regionalExam2').value);
-      
-      var result = (nationalExam * 0.75) + (regionalExam * 0.25);
-      
-      document.getElementById('resultCalculationResult').innerHTML = "Result: " + result.toFixed(2);
-    }
-
-    function calculateEquation() {
-      var session1 = parseFloat(document.getElementById('session1').value);
-      var session2 = parseFloat(document.getElementById('session2').value);
-      
-      var equationResult = (session1 * 0.125) + (session2 * 0.125);
-      
-      document.getElementById('equationCalculationResult').innerHTML = "Equation Result: " + equationResult.toFixed(2);
+    function getEncouragement(mention) {
+      if (mention === 'Mention Passable') {
+        return "Félicitations pour votre mention passable ! Continuez à vous donner à fond et vous obtiendrez de meilleurs résultats à l'avenir.";
+      } else if (mention === 'Mention Assez Bien') {
+        return "Bravo pour votre mention assez bien ! Vous êtes sur la bonne voie. Persévérez et visez encore plus haut.";
+      } else if (mention === 'Mention Bien') {
+        return "Félicitations pour votre mention bien ! Votre travail acharné porte ses fruits. Continuez à vous surpasser.";
+      } else if (mention === 'Mention Très Bien') {
+        return "Exceptionnel ! Vous avez obtenu la mention très bien. Vous êtes un(e) étudiant(e) brillant(e) et talentueux(se). Continuez à exceller.";
+      } else {
+        return "Ne soyez pas découragé(e) ! Chaque résultat compte et chaque effort est important pour votre réussite future. Continuez à travailler dur.";
+      }
     }
   </script>
 </body>
