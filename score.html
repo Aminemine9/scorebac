@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baccalaureate Tools</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 10px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #e74c3c;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .btn:hover {
+      background-color: #c0392b;
+    }
+    
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .result-description {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+    .mention-passable {
+      color: #2980b9;
+    }
+    
+    .mention-assez-bien {
+      color: #27ae60;
+    }
+    
+    .mention-bien {
+      color: #f39c12;
+    }
+    
+    .mention-tres-bien {
+      color: #c0392b;
+    }
+    
+    .no-mention {
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center; color: #e74c3c;">Baccalaureate Tools</h1>
+  
+  <div class="container">
+    <h2 style="text-align: center; color: #e74c3c;">Moyenne Générale Calculator</h2>
+    <div class="form-group">
+      <label for="nationalExam">La note d'examen national:</label>
+      <input type="number" id="nationalExam" min="0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="regionalExam">La note d'examen régional:</label>
+      <input type="number" id="regionalExam" min="0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="session1">La note du session 1:</label>
+      <input type="number" id="session1" min="0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="session2">La note du session 2:</label>
+      <input type="number" id="session2" min="0" step="0.01">
+    </div>
+    <button class="btn" onclick="calculateMoyenneGenerale()">Calculate Moyenne Générale</button>
+    <div class="result" id="moyenneGeneraleResult"></div>
+  </div>
+
+  <div class="container">
+    <h2 style="text-align: center; color: #e74c3c;">Result Calculation Tool</h2>
+    <div class="form-group">
+      <label for="nationalExam2">La note d'examen national:</label>
+      <input type="number" id="nationalExam2" min="0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="regionalExam2">La note d'examen régional:</label>
+      <input type="number" id="regionalExam2" min="0" step="0.01">
+    </div>
+    <button class="btn" onclick="calculateResult()">Calculate Result</button>
+    <div class="result" id="resultCalculationResult"></div>
+  </div>
+
+  <div class="container">
+    <h2 style="text-align: center; color: #e74c3c;">Equation Calculation Tool</h2>
+    <div class="form-group">
+      <label for="session1">La note du session 1:</label>
+      <input type="number" id="session1" min="0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="session2">La note du session 2:</label>
+      <input type="number" id="session2" min="0" step="0.01">
+    </div>
+    <button class="btn" onclick="calculateEquation()">Calculate Equation</button>
+    <div class="result" id="equationCalculationResult"></div>
+  </div>
+
+  <script>
+    function calculateMoyenneGenerale() {
+      var nationalExam = parseFloat(document.getElementById('nationalExam').value);
+      var regionalExam = parseFloat(document.getElementById('regionalExam').value);
+      var session1 = parseFloat(document.getElementById('session1').value);
+      var session2 = parseFloat(document.getElementById('session2').value);
+
+      var moyenneGenerale = (nationalExam * 0.5) + (regionalExam * 0.25) + (session1 * 0.125) + (session2 * 0.125);
+      
+      document.getElementById('moyenneGeneraleResult').innerHTML = "Moyenne Générale: " + moyenneGenerale.toFixed(2);
+    }
+
+    function calculateResult() {
+      var nationalExam = parseFloat(document.getElementById('nationalExam2').value);
+      var regionalExam = parseFloat(document.getElementById('regionalExam2').value);
+      
+      var result = (nationalExam * 0.75) + (regionalExam * 0.25);
+      
+      document.getElementById('resultCalculationResult').innerHTML = "Result: " + result.toFixed(2);
+    }
+
+    function calculateEquation() {
+      var session1 = parseFloat(document.getElementById('session1').value);
+      var session2 = parseFloat(document.getElementById('session2').value);
+      
+      var equationResult = (session1 * 0.125) + (session2 * 0.125);
+      
+      document.getElementById('equationCalculationResult').innerHTML = "Equation Result: " + equationResult.toFixed(2);
+    }
+  </script>
+</body>
+</html>
