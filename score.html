@@ -3,12 +3,13 @@
 <head>
   <title>Calculatrice de Moyenne Générale</title>
   <style>
-    /* Styles for the calculator */
+    /* Shared styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
       color: #333;
       text-align: center;
+      padding: 10px;
     }
 
     h1 {
@@ -63,7 +64,67 @@
       }
     }
 
-    /* Styles for the mention messages */
+    /* Styles for mobile devices */
+    @media (max-width: 767px) {
+      h1 {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+
+      input[type="number"], input[type="submit"] {
+        width: 100%;
+      }
+    }
+
+    /* Styles for tablet devices */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      h1 {
+        font-size: 32px;
+        margin-top: 40px;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      label, input[type="number"] {
+        width: 50%;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+      }
+    }
+
+    /* Styles for PC and larger screens */
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 48px;
+        margin-top: 50px;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      label {
+        width: 30%;
+      }
+
+      input[type="number"] {
+        width: 70%;
+      }
+
+      input[type="submit"] {
+        width: auto;
+      }
+    }
+
+    /* Mention styles */
     .mention-message {
       margin-top: 10px;
       font-weight: bold;
@@ -95,21 +156,23 @@
 
   <form id="score-form">
     <label for="national-score">Note d'examen national :</label>
-    <input type="number" id="national-score" required><br>
+    <input type="number" id="national-score" required>
 
     <label for="regional-score">Note d'examen régional :</label>
-    <input type="number" id="regional-score" required><br>
+    <input type="number" id="regional-score" required>
 
     <label for="session1-score">Note de la session 1 :</label>
-    <input type="number" id="session1-score" required><br>
+    <input type="number" id="session1-score" required>
 
     <label for="session2-score">Note de la session 2 :</label>
-    <input type="number" id="session2-score" required><br>
+    <input type="number" id="session2-score" required>
 
     <input type="submit" value="Calculer">
   </form>
 
-  <div id="result"></div>
+  <div id="result">
+    <!-- Le résultat, la mention et le message d'encouragement seront affichés ici -->
+  </div>
 
   <script>
     const form = document.getElementById('score-form');
