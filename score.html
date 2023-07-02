@@ -95,27 +95,21 @@
 
   <form id="score-form">
     <label for="national-score">Note d'examen national :</label>
-    <input type="number" id="national-score" required>
-    <br>
+    <input type="number" id="national-score" required><br>
 
     <label for="regional-score">Note d'examen régional :</label>
-    <input type="number" id="regional-score" required>
-    <br>
+    <input type="number" id="regional-score" required><br>
 
     <label for="session1-score">Note de la session 1 :</label>
-    <input type="number" id="session1-score" required>
-    <br>
+    <input type="number" id="session1-score" required><br>
 
     <label for="session2-score">Note de la session 2 :</label>
-    <input type="number" id="session2-score" required>
-    <br>
+    <input type="number" id="session2-score" required><br>
 
     <input type="submit" value="Calculer">
   </form>
 
-  <div id="result">
-    <!-- Le résultat, la mention et le message d'encouragement seront affichés ici -->
-  </div>
+  <div id="result"></div>
 
   <script>
     const form = document.getElementById('score-form');
@@ -124,12 +118,10 @@
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      const nationalScore = parseFloat(document.getElementById('national-score').value);
-      const regionalScore = parseFloat(document.getElementById('regional-score').value);
-      const session1Score = parseFloat(document.getElementById('session1-score').value);
-      const session2Score = parseFloat(document.getElementById('session2-score').value);
+      const scores = ['national-score', 'regional-score', 'session1-score', 'session2-score'].map(id => parseFloat(document.getElementById(id).value));
+      const coefficients = [0.5, 0.25, 0.125, 0.125];
 
-      const moyenneGenerale = (nationalScore * 0.5) + (regionalScore * 0.25) + (session1Score * 0.125) + (session2Score * 0.125);
+      const moyenneGenerale = scores.reduce((total, score, index) => total + score * coefficients[index], 0);
       const mention = getMention(moyenneGenerale);
       const encouragement = getEncouragement(mention);
 
@@ -151,17 +143,15 @@
     }
 
     function getEncouragement(mention) {
-      if (mention === 'Mention Passable') {
-        return "Félicitations pour votre mention passable ! Continuez à vous donner à fond et vous obtiendrez de meilleurs résultats à l'avenir.";
-      } else if (mention === 'Mention Assez Bien') {
-        return "Bravo pour votre mention assez bien ! Vous êtes sur la bonne voie. Persévérez et visez encore plus haut.";
-      } else if (mention === 'Mention Bien') {
-        return "Félicitations pour votre mention bien ! Votre travail acharné porte ses fruits. Continuez à vous surpasser.";
-      } else if (mention === 'Mention Très Bien') {
-        return "Exceptionnel ! Vous avez obtenu la mention très bien. Vous êtes un(e) étudiant(e) brillant(e) et talentueux(se). Continuez à exceller.";
-      } else {
-        return "Ne soyez pas découragé(e) ! Chaque résultat compte et chaque effort est important pour votre réussite future. Continuez à travailler dur.";
-      }
+      const encouragementMessages = {
+        'Mention Passable': "Félicitations pour votre mention passable ! Continuez à vous donner à fond et vous obtiendrez de meilleurs résultats à l'avenir.",
+        'Mention Assez Bien': "Bravo pour votre mention assez bien ! Vous êtes sur la bonne voie. Persévérez et visez encore plus haut.",
+        'Mention Bien': "Félicitations pour votre mention bien ! Votre travail acharné porte ses fruits. Continuez à vous surpasser.",
+        'Mention Très Bien': "Exceptionnel ! Vous avez obtenu la mention très bien. Vous êtes un(e) étudiant(e) brillant(e) et talentueux(se). Continuez à exceller.",
+        'Aucune Mention': "Ne soyez pas découragé(e) ! Chaque résultat compte et chaque effort est important pour votre réussite future. Continuez à travailler dur."
+      };
+
+      return encouragementMessages[mention];
     }
   </script>
 </body>
